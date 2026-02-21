@@ -15,6 +15,8 @@
     <modules>
         <module>common-base</module>
         <module>common-notice</module>
+        <module>common-springboot-middleware</module>
+        <module>common-cache</module>
     </modules>
 
     <properties>
@@ -27,6 +29,11 @@
         <okhttp.version>4.12.0</okhttp.version>
         <javax-mail.version>1.6.2</javax-mail.version>
         <junit.version>5.10.2</junit.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
+        <logstash-logback-encoder.version>8.0</logstash-logback-encoder.version>
+        <caffeine.version>3.1.8</caffeine.version>
+        <guava.version>33.2.0-jre</guava.version>
+        <redisson.version>3.30.0</redisson.version>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +43,15 @@
                 <groupId>top.bulgat</groupId>
                 <artifactId>common-base</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <!-- Spring Boot BOM -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
             <!-- Lombok -->
@@ -85,6 +101,20 @@
                 <artifactId>junit-jupiter</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- Redisson -->
+            <dependency>
+                <groupId>org.redisson</groupId>
+                <artifactId>redisson-spring-boot-starter</artifactId>
+                <version>${redisson.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

@@ -1,26 +1,26 @@
 package top.bulgat.common.thread;
 
 /**
- * Thread context holder for logId.
+ * Thread context holder for traceId.
  * <p>
- * Stores a logId in {@link ThreadLocal} for request tracing across method calls.
+ * Stores a traceId in {@link ThreadLocal} for request tracing across method calls.
  */
 public final class ThreadContext {
 
-    private static final ThreadLocal<Long> LOG_ID = new ThreadLocal<>();
+    private static final ThreadLocal<String> TRACE_ID = new ThreadLocal<>();
 
     private ThreadContext() {
     }
 
-    public static void setLogId(Long logId) {
-        LOG_ID.set(logId);
+    public static void setTraceId(String traceId) {
+        TRACE_ID.set(traceId);
     }
 
-    public static Long getLogId() {
-        return LOG_ID.get();
+    public static String getTraceId() {
+        return TRACE_ID.get();
     }
 
     public static void clear() {
-        LOG_ID.remove();
+        TRACE_ID.remove();
     }
 }

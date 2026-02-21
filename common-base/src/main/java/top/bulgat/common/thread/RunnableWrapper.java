@@ -1,13 +1,13 @@
 package top.bulgat.common.thread;
 
 /**
- * Runnable wrapper that propagates logId across thread boundaries.
+ * Runnable wrapper that propagates traceId across thread boundaries.
  * <p>
- * Captures the logId from the submitting thread via {@link ThreadContext}
+ * Captures the traceId from the submitting thread via {@link ThreadContext}
  * and restores it in the executing thread.
  *
  * <pre>
- * ThreadContext.setLogId(snowflake.nextId());
+ * ThreadContext.setTraceId(traceId);
  * executor.submit(RunnableWrapper.of(myRunnable));
  * </pre>
  */
@@ -15,11 +15,11 @@ public class RunnableWrapper implements Runnable {
 
     private final Runnable runnable;
 
-    private final Long logId;
+    private final String traceId;
 
     public RunnableWrapper(Runnable runnable) {
         this.runnable = runnable;
-        this.logId = ThreadContext.getLogId();
+        this.traceId = ThreadContext.getTraceId();
     }
 
     public static RunnableWrapper of(Runnable runnable) {
@@ -28,7 +28,7 @@ public class RunnableWrapper implements Runnable {
 
     @Override
     public void run() {
-        ThreadContext.setLogId(logId);
+        ThreadContext.setTraceId(traceId);
         try {
             runnable.run();
         } finally {

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- ================================================================
+         Properties from Spring Boot application config
+         ================================================================ -->
+    <springProperty scope="context" name="APP_NAME"    source="spring.application.name" defaultValue="app"/>
+    <springProperty scope="context" name="APP_VERSION" source="spring.application.version" defaultValue="unknown"/>
+    <springProperty scope="context" name="LOG_PATH"    source="logging.file.path"       defaultValue="logs"/>
+    <springProperty scope="context" name="LOG_LEVEL"   source="logging.level.root"      defaultValue="INFO"/>
+
+    <!-- ================================================================
+         Console appender – coloured text, for local/dev
+         Fields visible: timestamp, level, PID, thread, logger, traceId, message
+         ================================================================ -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p){highlight} %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} [%X{traceId}] %m%n%wEx</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- ================================================================
+         Rolling JSON file – structured output for ELK / Filebeat
+         Filebeat ships *.json.log to Logstash/Elasticsearch.
+         Every field is a first-class Elasticsearch field.
+
+         Fields emitted:
+           @timestamp      ISO-8601 UTC
+           level           INFO / WARN / ERROR …
+           logger_name     fully-qualified class name
+           thread_name     thread name
+           message         log message body
+           stack_trace     exception + root cause (if any, max 4 KB)
+           traceId         MDC – set by LogIdFilter (distributed trace)
+           app             spring.application.name
+           version         spring.application.version
+           host            hostname of the JVM
+           pid             OS process ID
+           env             spring.profiles.active (set via MDC in LogIdFilter)
+         ================================================================ -->
+    <appender name="FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/${APP_NAME}.json.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}/${APP_NAME}.%d{yyyy-MM-dd}.%i.json.log.gz</fileNamePattern>
+            <maxFileSize>200MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+
+            <!-- ---- Rename built-in fields to match ELK/OTel convention ---- -->
+            <fieldNames>
+                <timestamp>@timestamp</timestamp>
+                <version>[ignore]</version>
+                <levelValue>[ignore]</levelValue>
+            </fieldNames>
+
+            <!-- ---- MDC: promote traceId to top-level field ---- -->
+            <includeMdcKeyName>traceId</includeMdcKeyName>
+            <includeMdcKeyName>userId</includeMdcKeyName>
+            <includeMdcKeyName>requestUri</includeMdcKeyName>
+
+            <!-- ---- Static metadata fields ---- -->
+            <customFields>{"app":"${APP_NAME}","version":"${APP_VERSION}"}</customFields>
+
+            <!-- ---- Runtime host / pid via providers ---- -->
+            <provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider"/>
+            <provider class="net.logstash.logback.composite.loggingevent.TagsJsonProvider"/>
+
+            <!-- ---- Exception: root-cause first, max depth 30, max 4KB ---- -->
+            <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
+                <maxDepthPerThrowable>30</maxDepthPerThrowable>
+                <maxLength>4096</maxLength>
+                <rootCauseFirst>true</rootCauseFirst>
+                <exclude>sun\.reflect\..*</exclude>
+                <exclude>java\.lang\.reflect\..*</exclude>
+            </throwableConverter>
+
+        </encoder>
+    </appender>
+
+    <!-- ================================================================
+         Async wrappers
+         ================================================================ -->
+    <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="CONSOLE"/>
+        <queueSize>512</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <appender name="ASYNC_FILE_JSON" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="FILE_JSON"/>
+        <queueSize>1024</queueSize>
+        <discardingThreshold>0</discardingThreshold>
+    </appender>
+
+    <!-- ================================================================
+         Suppress noisy framework loggers
+         ================================================================ -->
+    <logger name="org.springframework"          level="WARN"/>
+    <logger name="org.hibernate"                level="WARN"/>
+    <logger name="com.zaxxer.hikari"            level="WARN"/>
+    <logger name="org.apache.http"              level="WARN"/>
+
+    <!-- ================================================================
+         Profile-based root configuration
+
+         local / dev  →  coloured console only (fast feedback)
+         prod         →  JSON file only (Filebeat → ELK)
+         default      →  console + JSON file
+         ================================================================ -->
+    <springProfile name="local,dev">
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="CONSOLE"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="prod">
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="ASYNC_FILE_JSON"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="!local &amp; !dev &amp; !prod">
+        <root level="${LOG_LEVEL}">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="ASYNC_FILE_JSON"/>
+        </root>
+    </springProfile>
+
+</configuration>

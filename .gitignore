@@ -8,7 +8,6 @@ target/
 *.iws
 *.iml
 *.ipr
-common.iml
 
 ### Eclipse ###
 .apt_generated
@@ -35,3 +34,5 @@ build/
 ### Mac OS ###
 .DS_Store
 
+### CUSTOM ###
+common-cache/redis-plugin
