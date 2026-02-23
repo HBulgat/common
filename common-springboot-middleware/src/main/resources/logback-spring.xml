@@ -4,6 +4,8 @@
     <!-- ================================================================
          Properties from Spring Boot application config
          ================================================================ -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
     <springProperty scope="context" name="APP_NAME"    source="spring.application.name" defaultValue="app"/>
     <springProperty scope="context" name="APP_VERSION" source="spring.application.version" defaultValue="unknown"/>
     <springProperty scope="context" name="LOG_PATH"    source="logging.file.path"       defaultValue="logs"/>
@@ -49,26 +51,25 @@
         </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
 
-            <!-- ---- Rename built-in fields to match ELK/OTel convention ---- -->
+            <!-- ==== Rename built-in fields to match ELK/OTel convention ==== -->
             <fieldNames>
                 <timestamp>@timestamp</timestamp>
                 <version>[ignore]</version>
                 <levelValue>[ignore]</levelValue>
             </fieldNames>
 
-            <!-- ---- MDC: promote traceId to top-level field ---- -->
+            <!-- ==== MDC: promote traceId to top-level field ==== -->
             <includeMdcKeyName>traceId</includeMdcKeyName>
             <includeMdcKeyName>userId</includeMdcKeyName>
             <includeMdcKeyName>requestUri</includeMdcKeyName>
 
-            <!-- ---- Static metadata fields ---- -->
+            <!-- ==== Static metadata fields ==== -->
             <customFields>{"app":"${APP_NAME}","version":"${APP_VERSION}"}</customFields>
 
-            <!-- ---- Runtime host / pid via providers ---- -->
-            <provider class="net.logstash.logback.composite.loggingevent.ArgumentsJsonProvider"/>
-            <provider class="net.logstash.logback.composite.loggingevent.TagsJsonProvider"/>
+            <!-- ==== Runtime host / pid via providers ==== -->
+            <!-- Configured implicitly or removed as LogstashEncoder does not support ad-hoc provider tags -->
 
-            <!-- ---- Exception: root-cause first, max depth 30, max 4KB ---- -->
+            <!-- ==== Exception: root-cause first, max depth 30, max 4KB ==== -->
             <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
                 <maxDepthPerThrowable>30</maxDepthPerThrowable>
                 <maxLength>4096</maxLength>

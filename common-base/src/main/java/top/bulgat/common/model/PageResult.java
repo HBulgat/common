@@ -22,30 +22,32 @@ public class PageResult<T> implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    private int pageNum;
+    private int current;
 
-    private int pageSize;
+    private int size;
 
     private long total;
 
     private List<T> list;
 
-    public static <T> PageResult<T> of(int pageNum, int pageSize, long total, List<T> list) {
-        return new PageResult<>(pageNum, pageSize, total, list);
+    public static <T> PageResult<T> of(int current, int size, long total, List<T> list) {
+        return new PageResult<>(current, size, total, list);
     }
 
-    public static <T> PageResult<T> empty(int pageNum, int pageSize) {
-        return new PageResult<>(pageNum, pageSize, 0, Collections.emptyList());
+    public static <T> PageResult<T> empty(int current, int size) {
+        return new PageResult<>(current, size, 0, Collections.emptyList());
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     public int getTotalPages() {
-        if (pageSize <= 0) {
+        if (size <= 0) {
             return 0;
         }
-        return (int) Math.ceil((double) total / pageSize);
+        return (int) Math.ceil((double) total / size);
     }
 
+    @com.fasterxml.jackson.annotation.JsonIgnore
     public boolean hasNext() {
-        return pageNum < getTotalPages();
+        return current < getTotalPages();
     }
 }
