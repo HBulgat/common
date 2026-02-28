@@ -1,4 +1,4 @@
-package top.bulgat.common.model;
+package top.bulgat.common.base.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

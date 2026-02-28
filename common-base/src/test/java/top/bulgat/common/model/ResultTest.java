@@ -1,7 +1,8 @@
 package top.bulgat.common.model;
 
 import org.junit.jupiter.api.Test;
-import top.bulgat.common.exception.ErrorCode;
+import top.bulgat.common.base.exception.ErrorCode;
+import top.bulgat.common.base.model.Result;
 
 import static org.junit.jupiter.api.Assertions.*;
 

@@ -33,7 +33,7 @@
 **主要内容：**
 本模块通过自动装配机制 (`AutoConfiguration`) 提供了一批企业级基础增强环境组件：
 - **`GlobalExceptionHandler`**：全局拦截 Spring Web 请求抛出的任何异常。将其转化为标准的 `Result` JSON 并严防堆栈侧漏（未知致命异常伪装为 500）。
-- **零配置分布式 TraceId 链路追踪体系**：通过高优先级过滤器 `TraceIdFilter` 派发/继承 `traceId` 并塞入 `MDC` 给 Logback。配备 `MdcAsyncConfig` 保障该 ID 能穿透 `@Async` 异步线程不出错。
+- **零配置分布式 TraceId 链路追踪体系**：通过高优先级过滤器 `TraceIdFilter` 派发/继承 `traceId` 并塞入 `MDC` 给 Logback。配备 `MdcAsyncConfig` 保障该 ID 能穿透 `@Async("mdcTaskExecutor")` 异步线程不出错。
 - **`RequestLoggingFilter`**：全天候可观测的 Web 流量黑匣子，基于 AOP 精准记录出入参快照与毫秒耗时。
 - **`logback-spring.xml`**：内建日志分级切割体系。开发时终端彩色高亮；生产时异步写 JSON (`net.logstash.logback`) 供 ELK 直连抓取。
 - **`JsonConfig`**：解决双端交互通病，例如强制 ISO-8601 日期格式，将 `Long` 自动转成 `String` 防止前端 JS 精度丢失。

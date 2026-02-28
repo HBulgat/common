@@ -1,7 +1,7 @@
-package top.bulgat.common.util;
+package top.bulgat.common.base.util;
 
-import top.bulgat.common.exception.ErrorCode;
-import top.bulgat.common.exception.BizException;
+import top.bulgat.common.base.exception.ErrorCode;
+import top.bulgat.common.base.exception.BizException;
 
 /**
  * 抛出异常的工具类，用于便捷地抛出异常。

@@ -1,4 +1,4 @@
-package top.bulgat.common.exception;
+package top.bulgat.common.base.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

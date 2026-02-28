@@ -1,7 +1,8 @@
 package top.bulgat.common.id;
 
 import org.junit.jupiter.api.Test;
-import top.bulgat.common.id.impl.UuidIdGenerator;
+import top.bulgat.common.base.id.IdGenerator;
+import top.bulgat.common.base.id.impl.UuidIdGenerator;
 
 import java.util.HashSet;
 import java.util.Set;

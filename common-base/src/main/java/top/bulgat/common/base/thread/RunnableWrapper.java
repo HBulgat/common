@@ -1,4 +1,4 @@
-package top.bulgat.common.thread;
+package top.bulgat.common.base.thread;
 
 /**
  * 在线程边界间传播 traceId 的 Runnable 包装器。

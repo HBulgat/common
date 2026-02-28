@@ -9,8 +9,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import top.bulgat.common.exception.BizException;
-import top.bulgat.common.model.Result;
+import top.bulgat.common.base.exception.BizException;
+import top.bulgat.common.base.model.Result;
 
 import java.util.stream.Collectors;
 

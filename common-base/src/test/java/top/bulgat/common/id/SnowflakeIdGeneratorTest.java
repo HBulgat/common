@@ -1,7 +1,8 @@
 package top.bulgat.common.id;
 
 import org.junit.jupiter.api.Test;
-import top.bulgat.common.id.impl.SnowflakeIdGenerator;
+import top.bulgat.common.base.id.IdGenerator;
+import top.bulgat.common.base.id.impl.SnowflakeIdGenerator;
 
 import java.util.HashSet;
 import java.util.Set;

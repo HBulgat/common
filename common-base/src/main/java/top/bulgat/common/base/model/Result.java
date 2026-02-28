@@ -1,9 +1,10 @@
-package top.bulgat.common.model;
+package top.bulgat.common.base.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import top.bulgat.common.exception.ErrorCode;
+import top.bulgat.common.base.exception.ErrorCode;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -57,6 +58,7 @@ public class Result<T> implements Serializable {
         return new Result<>(ErrorCode.SYSTEM_ERROR.getCode(), message, null);
     }
 
+    @JsonIgnore
     public boolean isSuccess() {
         return this.code == ErrorCode.SUCCESS.getCode();
     }

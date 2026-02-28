@@ -20,7 +20,7 @@ import java.util.concurrent.Executor;
 @Configuration
 public class MdcAsyncConfig {
 
-    @Bean(name = "taskExecutor")
+    @Bean(name = "mdcTaskExecutor")
     public Executor mdcAwareTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(Runtime.getRuntime().availableProcessors());

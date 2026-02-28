@@ -22,7 +22,8 @@
   最后同样把该 ID 设回客户端响应包的 header，并在整个 MVC 链结束的 `finally` 阶段将其彻底由当前线程销毁，从而防范内存泄漏或者线程池污染。
 
 - **`MdcAsyncConfig`**：
-  默认提供了叫做 `taskExecutor` 的 `@Async` 支持执行器。它覆写并提供了 `TaskDecorator`。在任务通过 `@Async` 注解提交到线程池排队时，其能够主动截获主调线程里暂存的 `MDC(TraceId)`，并在工作子线程启动时重新覆盖它。借此保障所有后台异步线程打印的日志全部带有和同步控制器一模一样的前缀 TraceId。
+  默认提供了叫做 `mdcTaskExecutor` 的 `@Async` 支持执行器。它覆写并提供了 `TaskDecorator`。在任务通过 `@Async("mdcTaskExecutor")` 注解提交到线程池排队时，其能够主动截获主调线程里暂存的 `MDC(TraceId)`，并在工作子线程启动时重新覆盖它。借此保障所有后台异步线程打印的日志全部带有和同步控制器一模一样的前缀 TraceId。
+  > ⚠️ **注意**：所有用到异步的地方，必须指定线程池名字：`@Async("mdcTaskExecutor")`
 
 ### 3. 请求打点过滤器 (`RequestLoggingFilter`)
 此过滤器不会默认开启。需在 `application.yml` 中主动打开 `common.middleware.request-log.enabled=true` 配置。

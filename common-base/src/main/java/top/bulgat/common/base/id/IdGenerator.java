@@ -1,4 +1,4 @@
-package top.bulgat.common.id;
+package top.bulgat.common.base.id;
 
 /**
  * ID 生成器接口。

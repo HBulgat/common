@@ -1,4 +1,4 @@
-package top.bulgat.common.util;
+package top.bulgat.common.base.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

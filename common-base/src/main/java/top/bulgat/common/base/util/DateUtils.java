@@ -1,4 +1,4 @@
-package top.bulgat.common.util;
+package top.bulgat.common.base.util;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

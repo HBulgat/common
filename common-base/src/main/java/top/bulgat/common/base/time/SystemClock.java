@@ -1,4 +1,4 @@
-package top.bulgat.common.time;
+package top.bulgat.common.base.time;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

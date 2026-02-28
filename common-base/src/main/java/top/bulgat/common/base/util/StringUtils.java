@@ -1,4 +1,4 @@
-package top.bulgat.common.util;
+package top.bulgat.common.base.util;
 
 /**
  * 字符串工具类。

@@ -1,11 +1,13 @@
 package top.bulgat.common.springboot.middleware.config;
 
+import lombok.Data;
+import lombok.Getter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import top.bulgat.common.id.IdGenerator;
-import top.bulgat.common.id.impl.SnowflakeIdGenerator;
+import top.bulgat.common.base.id.IdGenerator;
+import top.bulgat.common.base.id.impl.SnowflakeIdGenerator;
 
 /**
  * 自动配置基于 Snowflake 算法的 {@link IdGenerator} Bean。
@@ -33,13 +35,9 @@ public class SnowflakeIdConfig {
         return new SnowflakeIdGenerator(props.getWorkerId(), props.getDatacenterId());
     }
 
+    @Data
     public static class SnowflakeProperties {
         private long workerId = 1;
         private long datacenterId = 1;
-
-        public long getWorkerId() { return workerId; }
-        public void setWorkerId(long workerId) { this.workerId = workerId; }
-        public long getDatacenterId() { return datacenterId; }
-        public void setDatacenterId(long datacenterId) { this.datacenterId = datacenterId; }
     }
 }

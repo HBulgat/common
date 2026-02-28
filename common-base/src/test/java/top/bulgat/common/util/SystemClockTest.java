@@ -1,7 +1,7 @@
 package top.bulgat.common.util;
 
 import org.junit.jupiter.api.Test;
-import top.bulgat.common.time.SystemClock;
+import top.bulgat.common.base.time.SystemClock;
 
 import static org.junit.jupiter.api.Assertions.*;
 

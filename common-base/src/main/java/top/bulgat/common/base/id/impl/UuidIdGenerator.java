@@ -1,6 +1,6 @@
-package top.bulgat.common.id.impl;
+package top.bulgat.common.base.id.impl;
 
-import top.bulgat.common.id.IdGenerator;
+import top.bulgat.common.base.id.IdGenerator;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
-package top.bulgat.common.id.impl;
+package top.bulgat.common.base.id.impl;
 
 import lombok.Getter;
-import top.bulgat.common.id.IdGenerator;
-import top.bulgat.common.time.SystemClock;
+import top.bulgat.common.base.id.IdGenerator;
+import top.bulgat.common.base.time.SystemClock;
 
 /**
  * 雪花算法 ID 生成器。

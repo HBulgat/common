@@ -1,6 +1,8 @@
 package top.bulgat.common.exception;
 
 import org.junit.jupiter.api.Test;
+import top.bulgat.common.base.exception.BizException;
+import top.bulgat.common.base.exception.ErrorCode;
 
 import static org.junit.jupiter.api.Assertions.*;
 

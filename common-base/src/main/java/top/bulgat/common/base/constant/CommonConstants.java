@@ -1,4 +1,4 @@
-package top.bulgat.common.constant;
+package top.bulgat.common.base.constant;
 
 /**
  * 公共常量类。

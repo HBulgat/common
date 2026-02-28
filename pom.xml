@@ -17,6 +17,7 @@
         <module>common-notice</module>
         <module>common-springboot-middleware</module>
         <module>common-cache</module>
+        <module>common-springboot-middleware-test</module>
     </modules>
 
     <properties>

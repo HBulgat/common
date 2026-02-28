@@ -1,4 +1,4 @@
-package top.bulgat.common.thread;
+package top.bulgat.common.base.thread;
 
 /**
  * traceId 的线程上下文持有者。
