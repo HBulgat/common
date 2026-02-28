@@ -392,6 +392,7 @@ public class CacheTemplate {
         }
     }
 
+    /**
      * 使用 Jackson TypeFactory 反序列化 {@link CacheData}{@code <V>}，
      * 以便将泛型 {@code data} 字段正确映射到类型 V。
      */
