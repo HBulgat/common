@@ -37,7 +37,7 @@ public class CacheTemplate {
     private final CacheStore store;
     private final ObjectMapper objectMapper;
     private final CacheProperties properties;
-    /** Thread pool for async logical-expiry cache rebuilding. */
+    /** 用于后台逻辑过期重建的异步线程池。 */
     private final ExecutorService rebuildExecutor;
 
     public CacheTemplate(CacheStore store, ObjectMapper objectMapper, CacheProperties properties) {
@@ -100,9 +100,9 @@ public class CacheTemplate {
      * 【防缓存击穿】基于逻辑过期 (Logical Expiry) 的读取策略。
      * <p>执行流程：
      * <ol>
-     *   <li>Read the {@link CacheData} from cache (key must be pre-warmed)</li>
-     *   <li>If not expired → return embedded data immediately</li>
-     *   <li>If expired → submit async rebuild task; return stale data immediately</li>
+     *   <li>从缓存中读取 {@link CacheData}（键必须已被预热）</li>
+     *   <li>如果未过期 → 立即返回内部包装的数据</li>
+     *   <li>如果已过期 → 提交异步重建任务；立即返回旧数据</li>
      * </ol>
      */
     public <ID, V> V getWithLogicalExpiry(ID id, Class<V> type, CacheLoader<ID, V> loader) {
@@ -122,7 +122,7 @@ public class CacheTemplate {
             return value; // still valid — fast path
         }
 
-        // Logically expired: trigger async rebuild and return stale value
+        // 逻辑已过期: 触发异步重建并返回旧数据
         rebuildExecutor.submit(() -> rebuildLogicalExpiry(id, loader));
         return value;
     }
@@ -392,9 +392,8 @@ public class CacheTemplate {
         }
     }
 
-    /**
-     * Deserialize a {@link CacheData}{@code <V>} using Jackson TypeFactory
-     * so that the generic {@code data} field is correctly mapped to type V.
+     * 使用 Jackson TypeFactory 反序列化 {@link CacheData}{@code <V>}，
+     * 以便将泛型 {@code data} 字段正确映射到类型 V。
      */
     private <V> CacheData<V> deserializeWrapped(String json, Class<V> type) {
         if (json == null) return null;

@@ -3,30 +3,30 @@ package top.bulgat.common.springboot.cache.config;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * Configuration properties for common-cache.
+ * common-cache 的配置属性。
  *
  * <pre>
  * common:
  *   cache:
- *     null-value-ttl: 60          # seconds a null-marker stays in cache (防穿透)
- *     jitter-factor: 0.2          # ±20% random TTL spread (防雪崩), 0 = disabled
- *     rebuild-executor-size: 4    # threads for async logical-expiry rebuild (防击穿)
+ *     null-value-ttl: 60          # 空值标记在缓存中停留的秒数（防穿透）
+ *     jitter-factor: 0.2          # ±20% 随机 TTL 波动（防雪崩），0 = 禁用
+ *     rebuild-executor-size: 4    # 异步逻辑过期重建的线程数（防击穿）
  * </pre>
  */
 @ConfigurationProperties(prefix = "common.cache")
 public class CacheProperties {
 
-    /** TTL in seconds for null-marker entries (cache penetration prevention). */
+    /** 空值条目（防止缓存穿透）的 TTL 秒数。 */
     private long nullValueTtl = 60;
 
     /**
-     * Fraction of TTL to use as random jitter (cache avalanche prevention).
-     * E.g. 0.2 means actual TTL = configured TTL × (1 ± random(0, 0.2)).
-     * Set to 0 to disable jitter.
+     * 作为随机波动的 TTL 比例（防止缓存雪崩）。
+     * 例如，0.2 意味着实际 TTL = 配置的 TTL × (1 ± random(0, 0.2))。
+     * 设为 0 可禁用随机波动。
      */
     private double jitterFactor = 0.2;
 
-    /** Thread pool size for async logical-expiry cache rebuild. */
+    /** 异步逻辑过期缓存重建的线程池大小。 */
     private int rebuildExecutorSize = 4;
 
     public long getNullValueTtl() { return nullValueTtl; }

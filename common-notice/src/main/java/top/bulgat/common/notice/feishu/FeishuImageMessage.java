@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 /**
- * Feishu image message.
+ * 飞书图片消息。
  */
 @Data
 @SuperBuilder
@@ -19,7 +19,7 @@ import java.util.Map;
 public class FeishuImageMessage extends FeishuMessage {
 
     /**
-     * Image key obtained from Feishu upload API.
+     * 从飞书上传接口获取的图片 key。
      */
     private String imageKey;
 

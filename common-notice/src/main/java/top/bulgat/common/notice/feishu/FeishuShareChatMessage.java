@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 /**
- * Feishu share chat (group card) message.
+ * 飞书分享群名片消息。
  */
 @Data
 @SuperBuilder
@@ -19,7 +19,7 @@ import java.util.Map;
 public class FeishuShareChatMessage extends FeishuMessage {
 
     /**
-     * Chat ID to share (e.g. "oc_xxx").
+     * 要分享的群组 ID（例如 "oc_xxx"）。
      */
     private String shareChatId;
 

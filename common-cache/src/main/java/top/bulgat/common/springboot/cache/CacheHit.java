@@ -1,9 +1,9 @@
 package top.bulgat.common.springboot.cache;
 
 /**
- * Represents the result of reading from the cache.
- * Distinguishes between a true miss (data not in cache) and a hit
- * (which could hold a null value due to anti-penetration).
+ * 表示从缓存读取的结果。
+ * 区分真实的未命中（缓存中无数据）和命中
+ * （由于防穿透机制可能包含 null 值）。
  */
 public class CacheHit<V> {
     private final boolean hit;

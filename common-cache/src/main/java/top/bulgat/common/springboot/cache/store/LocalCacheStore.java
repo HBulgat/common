@@ -6,27 +6,27 @@ import java.util.*;
 import java.util.concurrent.*;
 
 /**
- * {@link CacheStore} implementation backed by JDK concurrent collections only.
- * No external dependencies required — serves as a local/dev fallback when Redis is unavailable.
+ * 仅由 JDK 并发集合支持的 {@link CacheStore} 实现。
+ * 无需任何外部依赖 — 当 Redis 不可用时，作为本地/开发环境的回退实现。
  *
- * <p><b>TTL</b>: enforced via a background eviction thread that runs every second.
- * For Hash / List / Set / ZSet there is no TTL (in-memory only).
+ * <p><b>TTL过期</b>：通过每秒运行一次的后台驱逐线程强制执行。
+ * 对于 Hash / List / Set / ZSet 是没有 TTL（存活时间）的（仅存在于内存中）。
  */
 public class LocalCacheStore implements CacheStore {
 
-    /** String values with optional expiry. */
+    /** 包含可选过期的 String 值。 */
     private final ConcurrentHashMap<String, Entry> stringStore = new ConcurrentHashMap<>();
 
-    /** Hash: key → field → value */
+    /** 哈希缓存: key → field → value */
     private final ConcurrentHashMap<String, ConcurrentHashMap<String, String>> hashStore = new ConcurrentHashMap<>();
 
-    /** List: key → list (index 0 = "left" / head) */
+    /** 列表缓存: key → list (索引 0 = 左侧 / 头部) */
     private final ConcurrentHashMap<String, CopyOnWriteArrayList<String>> listStore = new ConcurrentHashMap<>();
 
-    /** Set: key → member set */
+    /** 集合缓存: key → member 集合 */
     private final ConcurrentHashMap<String, Set<String>> setStore = new ConcurrentHashMap<>();
 
-    /** ZSet: key → score-ascending ordered map (score → member) */
+    /** 有序集合缓存: key → score-升序排序树 (score → member) */
     private final ConcurrentHashMap<String, ConcurrentSkipListMap<Double, String>> zsetStore = new ConcurrentHashMap<>();
 
     private final ScheduledExecutorService evictScheduler;
@@ -40,7 +40,7 @@ public class LocalCacheStore implements CacheStore {
         evictScheduler.scheduleAtFixedRate(this::evictExpired, 1, 1, TimeUnit.SECONDS);
     }
 
-    // ---- TTL eviction ----
+    // ---- TTL 驱逐处理 ----
 
     private void evictExpired() {
         long now = System.currentTimeMillis();
@@ -49,7 +49,7 @@ public class LocalCacheStore implements CacheStore {
 
     private static class Entry {
         final String value;
-        final long expireAtMs; // -1 = forever
+        final long expireAtMs; // -1 = 永远有效
 
         Entry(String value, long expireAtMs) {
             this.value = value;

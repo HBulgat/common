@@ -12,9 +12,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
- * Feishu custom bot webhook sender.
+ * 飞书自定义机器人 Webhook 发送器。
  * <p>
- * Supports various message types by delegating payload construction to {@link FeishuMessage}.
+ * 通过委托 {@link FeishuMessage} 构建载荷来支持各种消息类型。
  */
 public class FeishuNoticeSender implements NoticeSender {
 
@@ -59,8 +59,8 @@ public class FeishuNoticeSender implements NoticeSender {
                     return false;
                 }
                 
-                // Feishu returns {"code":0,"msg":"success"} on success
-                // We check for "code":0 or "StatusCode":0 (v3 bot vs v2 hook might differ)
+                // 飞书成功时返回 {"code":0,"msg":"success"}
+                // 我们检查 "code":0 或 "StatusCode":0（v3 机器人与 v2 webhook 可能不同）
                 if (respBody.contains("\"code\":0") || respBody.contains("\"StatusCode\":0")) {
                     return true;
                 }

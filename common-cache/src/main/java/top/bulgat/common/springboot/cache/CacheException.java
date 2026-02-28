@@ -1,7 +1,7 @@
 package top.bulgat.common.springboot.cache;
 
 /**
- * Unchecked exception for cache operation failures.
+ * 缓存操作失败时的非受检异常。
  */
 public class CacheException extends RuntimeException {
 

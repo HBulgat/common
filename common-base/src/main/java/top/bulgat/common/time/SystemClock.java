@@ -6,10 +6,10 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 
 /**
- * High-performance system clock.
+ * 高性能系统时钟。
  * <p>
- * Caches {@link System#currentTimeMillis()} at a configurable precision to avoid
- * frequent system calls. Useful in high-throughput scenarios (e.g. ID generation, logging).
+ * 以可配置的精度缓存 {@link System#currentTimeMillis()} 以避免
+ * 频繁的系统调用。适用于高吞吐量场景（例如 ID 生成，日志记录）。
  */
 public class SystemClock {
 
@@ -28,14 +28,14 @@ public class SystemClock {
     }
 
     /**
-     * Get the singleton millisecond-precision clock instance.
+     * 获取单例的毫秒级精度时钟实例。
      */
     public static SystemClock millisClock() {
         return MILLIS_CLOCK;
     }
 
     /**
-     * Get the cached current time in milliseconds.
+     * 获取缓存的当前时间的毫秒数。
      */
     public long now() {
         return now.get();

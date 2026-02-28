@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
 
     <name>common-notice</name>
-    <description>Common notice module (Feishu, Email)</description>
+    <description>公共消息通知模块 (支持飞书、邮件等多渠道)</description>
 
     <dependencies>
         <dependency>

@@ -10,9 +10,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Paginated response wrapper.
+ * 分页响应包装类。
  *
- * @param <T> list element type
+ * @param <T> 列表元素类型
  */
 @Data
 @NoArgsConstructor

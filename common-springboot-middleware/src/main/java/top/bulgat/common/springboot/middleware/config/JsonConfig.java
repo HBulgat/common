@@ -18,16 +18,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Global Jackson ObjectMapper configuration.
+ * 全局 Jackson ObjectMapper 配置。
  * <ul>
- *   <li>Unknown properties are ignored during deserialization</li>
- *   <li>Java 8 time types (LocalDateTime, etc.) use ISO-8601 strings</li>
- *   <li>Long / long values are serialized as Strings to avoid JS precision loss</li>
+ *   <li>反序列化时忽略未知属性</li>
+ *   <li>Java 8 时间类型 (LocalDateTime 等) 使用 ISO-8601 字符串</li>
+ *   <li>Long / long 值序列化为字符串，以避免 JS 精度丢失</li>
  * </ul>
- * Use {@code @ConditionalOnMissingBean} so the host application can fully override.
+ * 使用 {@code @ConditionalOnMissingBean} 以便宿主应用可以完全覆盖配置。
  */
 @Configuration
-public class JacksonConfig {
+public class JsonConfig {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd";
     private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
@@ -37,10 +37,10 @@ public class JacksonConfig {
     public ObjectMapper objectMapper() {
         ObjectMapper mapper = new ObjectMapper();
 
-        // ---- Deserialization behaviour ----
+        // ---- 反序列化行为 ----
         mapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
-        // ---- Date / time ----
+        // ---- 日期 / 时间 ----
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
 
         JavaTimeModule javaTimeModule = new JavaTimeModule();
@@ -53,7 +53,7 @@ public class JacksonConfig {
         javaTimeModule.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(dateTimeFormatter));
         mapper.registerModule(javaTimeModule);
 
-        // ---- Long -> String (prevent JS Number precision loss) ----
+        // ---- Long -> String (防止 JS Number 精度丢失) ----
         com.fasterxml.jackson.databind.module.SimpleModule longModule =
                 new com.fasterxml.jackson.databind.module.SimpleModule();
         longModule.addSerializer(Long.class, ToStringSerializer.instance);

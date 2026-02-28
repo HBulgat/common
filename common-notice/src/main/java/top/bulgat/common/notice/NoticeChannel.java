@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 /**
- * Supported notice channels.
+ * 支持的通知渠道。
  */
 @Getter
 @AllArgsConstructor

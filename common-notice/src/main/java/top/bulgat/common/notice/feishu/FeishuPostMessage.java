@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 /**
- * Feishu rich text (post) message.
+ * 飞书富文本 (post) 消息。
  */
 @Data
 @SuperBuilder
@@ -19,7 +19,7 @@ import java.util.Map;
 public class FeishuPostMessage extends FeishuMessage {
 
     /**
-     * Structured rich text content.
+     * 结构化的富文本内容。
      */
     private RichTextContent content;
 
@@ -30,9 +30,9 @@ public class FeishuPostMessage extends FeishuMessage {
 
     @Override
     protected Map<String, Object> specificPayload() {
-        // We need to return the content map directly.
-        // The structure is content: { post: { zh_cn: { title:..., content:... } } }
-        // RichTextContent.toObject returns POJO with title/content.
+        // 我们需要直接返回内容 map。
+        // 结构为 content: { post: { zh_cn: { title:..., content:... } } }
+        // RichTextContent.toObject 返回带有 title/content 的 POJO。
         
         RichTextContent.RichTextContentObject contentObj = content.toObject();
         return Map.of(KEY_CONTENT, Map.of("post", Map.of("zh_cn", contentObj)));

@@ -1,9 +1,9 @@
 package top.bulgat.common.thread;
 
 /**
- * Thread context holder for traceId.
+ * traceId 的线程上下文持有者。
  * <p>
- * Stores a traceId in {@link ThreadLocal} for request tracing across method calls.
+ * 在 {@link ThreadLocal} 中存储 traceId，用于跨方法调用的请求追踪。
  */
 public final class ThreadContext {
 

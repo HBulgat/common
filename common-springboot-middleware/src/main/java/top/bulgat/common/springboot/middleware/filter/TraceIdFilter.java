@@ -13,12 +13,12 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * Servlet filter that assigns a unique {@code traceId} to every HTTP request.
+ * 为每个 HTTP 请求分配唯一的 {@code traceId} 的 Servlet 过滤器。
  * <ul>
- *   <li>Stores the traceId in {@link MDC} as {@code traceId} (available in Logback pattern as {@code %X{traceId}})</li>
- *   <li>Stores in {@link ThreadContext} for application-level access</li>
- *   <li>Writes {@code X-Trace-Id} response header so callers can correlate logs</li>
- *   <li>Cleans up MDC/ThreadContext in {@code finally} to prevent memory leaks</li>
+ *   <li>将 traceId 存入 {@link MDC}，键为 {@code traceId} (在 Logback 模式中可通过 {@code %X{traceId}} 获取)</li>
+ *   <li>存入 {@link ThreadContext} 以供应用层访问</li>
+ *   <li>向响应头写入 {@code X-Trace-Id}，方便调用方关联日志</li>
+ *   <li>在 {@code finally} 块中清理 MDC/ThreadContext，防止内存泄漏</li>
  * </ul>
  */
 @Order(1)
@@ -31,7 +31,7 @@ public class TraceIdFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain chain) throws ServletException, IOException {
-        // Honour existing traceId from upstream (e.g., gateway) if present
+        // 如果存在，优先使用上游（例如网关）传入的 traceId
         String traceId = request.getHeader(TRACE_ID_HEADER);
         if (traceId == null || traceId.isBlank()) {
             traceId = UUID.randomUUID().toString().replace("-", "");

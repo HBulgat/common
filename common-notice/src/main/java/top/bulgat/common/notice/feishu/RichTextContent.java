@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Rich text content builder for Feishu post messages.
+ * 飞书富文本(post)消息的内容构建器。
  */
 public class RichTextContent {
 
@@ -30,7 +30,7 @@ public class RichTextContent {
         return new RichTextContentObject(title, lines);
     }
     
-    // Helper POJO for serialization
+    // 用于 JSON 序列化的辅助 POJO
     public static class RichTextContentObject {
         public String title;
         public List<List<RichTextElement>> content;

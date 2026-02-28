@@ -36,3 +36,4 @@ build/
 
 ### CUSTOM ###
 common-cache/redis-plugin
+*.log

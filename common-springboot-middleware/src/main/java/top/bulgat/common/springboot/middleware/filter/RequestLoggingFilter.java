@@ -13,12 +13,12 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 /**
- * Optional request/response logging filter.
+ * 可选的请求/响应日志过滤器。
  * <p>
- * Logs: {@code [METHOD /path] STATUS | Xms | traceId=...}
+ * 日志格式：{@code [METHOD /path] STATUS | Xms | traceId=...}
  * <p>
- * Activated by setting {@code common.middleware.request-log.enabled=true} (default: {@code false}).
- * Bean registration is done conditionally in {@link top.bulgat.common.springboot.middleware.MiddlewareAutoConfiguration}.
+ * 通过设置 {@code common.middleware.request-log.enabled=true} 激活 (默认：{@code false})。
+ * Bean 的注册已在 {@link top.bulgat.common.springboot.middleware.MiddlewareAutoConfiguration} 中条件化完成。
  */
 @Order(2)
 public class RequestLoggingFilter extends OncePerRequestFilter {

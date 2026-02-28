@@ -13,22 +13,22 @@ import top.bulgat.common.springboot.cache.store.LocalCacheStore;
 import top.bulgat.common.springboot.cache.store.RedisCacheStore;
 
 /**
- * Spring Boot auto-configuration for common-cache.
+ * common-cache 的 Spring Boot 自动配置。
  *
- * <p>Store selection priority:
+ * <p>缓存存储选择优先级：
  * <ol>
- *   <li>If {@code StringRedisTemplate} is on the classpath and a bean is present → {@link RedisCacheStore}</li>
- *   <li>Otherwise → {@link LocalCacheStore} (Caffeine or fallback in-memory)</li>
+ *   <li>如果类路径中存在 {@code StringRedisTemplate} 并且有名为该类型的 Bean → {@link RedisCacheStore}</li>
+ *   <li>否则 → {@link LocalCacheStore} (Caffeine 或回退到内存实现)</li>
  * </ol>
  *
- * <p>All beans use {@code @ConditionalOnMissingBean} so host applications can override.
+ * <p>所有的 Bean 都使用了 {@code @ConditionalOnMissingBean}，因此宿主应用可以覆盖它们。
  */
 @AutoConfiguration
 @EnableConfigurationProperties(CacheProperties.class)
 public class CacheAutoConfiguration {
 
     // -----------------------------------------------------------------------
-    // Store: Redis (preferred when Redis is available)
+    // 缓存存储：Redis（如果 Redis 可用则首选）
     // -----------------------------------------------------------------------
 
     @Bean
@@ -39,18 +39,18 @@ public class CacheAutoConfiguration {
     }
 
     // -----------------------------------------------------------------------
-    // Store: Local fallback (Caffeine / in-memory when Redis is absent)
+    // 缓存存储：本地回退策略（当没有 Redis 时使用 Caffeine 或内存）
     // -----------------------------------------------------------------------
 
     @Bean
     @ConditionalOnMissingBean(CacheStore.class)
     public CacheStore localCacheStore(CacheProperties properties) {
-        // Fallback in-memory store using JDK ConcurrentHashMap
+        // 使用 JDK ConcurrentHashMap 作为后备的内存存储
         return new LocalCacheStore();
     }
 
     // -----------------------------------------------------------------------
-    // CacheTemplate — the main entry point for users
+    // CacheTemplate — 用户的主要入口点
     // -----------------------------------------------------------------------
 
     @Bean

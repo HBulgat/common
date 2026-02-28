@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 /**
- * {@link CacheStore} implementation backed by Redis via {@link StringRedisTemplate}.
+ * 基于 Redis 和 {@link StringRedisTemplate} 的 {@link CacheStore} 实现。
  */
 public class RedisCacheStore implements CacheStore {
 

@@ -5,11 +5,11 @@ import top.bulgat.common.id.IdGenerator;
 import java.util.UUID;
 
 /**
- * UUID-based ID generator.
+ * 基于 UUID 的 ID 生成器。
  * <p>
- * Generates standard UUID strings (lowercase, no dashes).
- * The {@link #nextId()} method is not supported since UUIDs are string-based;
- * use {@link #nextIdStr()} instead.
+ * 生成标准的 UUID 字符串 (小写，无连字符)。
+ * 不支持 {@link #nextId()} 方法，因为 UUID 是基于字符串的；
+ * 请使用 {@link #nextIdStr()} 代替。
  */
 public class UuidIdGenerator implements IdGenerator {
 

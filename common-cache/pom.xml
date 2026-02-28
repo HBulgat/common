@@ -13,16 +13,16 @@
     <artifactId>common-cache</artifactId>
     <packaging>jar</packaging>
     <name>common-cache</name>
-    <description>Cache abstraction with protection strategies (penetration, breakdown, avalanche).</description>
+    <description>带有防护策略的高级缓存抽象组件 (防穿透、防击穿、防雪崩)</description>
 
     <dependencies>
-        <!-- common-base: Result, BizException, etc. -->
+        <!-- common-base: Result, BizException 等 -->
         <dependency>
             <groupId>top.bulgat</groupId>
             <artifactId>common-base</artifactId>
         </dependency>
 
-        <!-- Spring Data Redis (provided: host project may or may not use Redis) -->
+        <!-- Spring Data Redis (provided: 宿主项目可能使用或不使用 Redis) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
@@ -30,14 +30,14 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Boot autoconfigure -->
+        <!-- Spring Boot 自动配置 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Configuration processor for @ConfigurationProperties IDE support -->
+        <!-- 配置处理器，用于提供 @ConfigurationProperties 在 IDE 中的提示支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -45,34 +45,34 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Jackson for JSON serialization -->
+        <!-- Jackson 用于 JSON 序列化 -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
 
-        <!-- Jackson JSR310 for LocalDateTime serialization in tests -->
+        <!-- Jackson JSR310 用于在测试中序列化 LocalDateTime -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Mockito for mocking CacheStore in CacheTemplate tests -->
+        <!-- Mockito 用于在 CacheTemplate 测试中 mock CacheStore -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
 
-        <!-- Guava for LocalBloomFilterOps -->
+        <!-- Guava 用于实现 LocalBloomFilterOps -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <optional>true</optional>
         </dependency>
 
-        <!-- Redisson for RedisBloomFilterOps -->
+        <!-- Redisson 用于实现 RedisBloomFilterOps -->
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>

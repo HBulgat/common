@@ -7,29 +7,29 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.Ordered;
 import top.bulgat.common.springboot.middleware.async.MdcAsyncConfig;
-import top.bulgat.common.springboot.middleware.config.JacksonConfig;
+import top.bulgat.common.springboot.middleware.config.JsonConfig;
 import top.bulgat.common.springboot.middleware.config.SnowflakeIdConfig;
 import top.bulgat.common.springboot.middleware.exception.GlobalExceptionHandler;
 import top.bulgat.common.springboot.middleware.filter.TraceIdFilter;
 import top.bulgat.common.springboot.middleware.filter.RequestLoggingFilter;
 
 /**
- * Spring Boot 3.x auto-configuration entry point.
+ * Spring Boot 3.x 自动配置入口点。
  * <p>
- * Automatically imported via {@code META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports}.
- * All beans use {@code @ConditionalOnMissingBean} where appropriate so the host application
- * can override any part of the configuration.
+ * 通过 {@code META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports} 自动导入。
+ * 所有的 Bean 在合适的地方都使用了 {@code @ConditionalOnMissingBean}，因此宿主应用
+ * 可以覆盖配置的任何部分。
  */
 @AutoConfiguration
 @Import({
-        JacksonConfig.class,
+        JsonConfig.class,
         SnowflakeIdConfig.class,
         MdcAsyncConfig.class,
         GlobalExceptionHandler.class,
 })
 public class MiddlewareAutoConfiguration {
 
-    // ---- LogId Filter (always active, highest priority) ----
+    // ---- LogId 过滤器 (始终激活，最高优先级) ----
 
     @Bean
     public FilterRegistrationBean<TraceIdFilter> logIdFilter() {
@@ -39,7 +39,7 @@ public class MiddlewareAutoConfiguration {
         return reg;
     }
 
-    // ---- Request Logging Filter (opt-in via config property) ----
+    // ---- 请求日志过滤器 (通过配置属性开启) ----
 
     @Bean
     @ConditionalOnProperty(

@@ -3,13 +3,12 @@ package top.bulgat.common.springboot.cache;
 import java.time.LocalDateTime;
 
 /**
- * Wrapper stored in the cache for the "logical expiry" anti-breakdown strategy.
+ * 缓存在系统中的数据包装类，用于实现“逻辑过期”防击穿策略。
  * <p>
- * The key is set with NO real TTL (permanent). Expiry is tracked inside this wrapper.
- * When a request finds the data logically expired, it returns the stale value immediately
- * and triggers an async rebuild in the background.
+ * 缓存键本身不设置真实 TTL（永久有效）。过期时间在该包装类内部跟踪。
+ * 当请求发现数据已逻辑过期时，会立即返回旧值，并在后台触发异步重建。
  *
- * @param <V> type of the cached business value
+ * @param <V> 缓存的业务值类型
  */
 public class CacheData<V> {
 

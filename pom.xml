@@ -10,7 +10,7 @@
     <packaging>pom</packaging>
 
     <name>common</name>
-    <description>Common dependency library</description>
+    <description>通用公共依赖库</description>
 
     <modules>
         <module>common-base</module>
@@ -38,7 +38,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- Internal modules -->
+            <!-- 内部模块 -->
             <dependency>
                 <groupId>top.bulgat</groupId>
                 <artifactId>common-base</artifactId>
@@ -119,7 +119,7 @@
         </dependencies>
     </dependencyManagement>
 
-    <!-- Common dependencies for all modules -->
+    <!-- 所有模块的通用依赖 -->
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>

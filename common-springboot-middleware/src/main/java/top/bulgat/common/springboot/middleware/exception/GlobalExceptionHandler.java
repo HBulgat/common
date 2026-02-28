@@ -15,11 +15,11 @@ import top.bulgat.common.model.Result;
 import java.util.stream.Collectors;
 
 /**
- * Global exception handler that converts exceptions to unified {@link Result} responses.
+ * 全局异常处理器，将异常转换为统一的 {@link Result} 响应。
  * <ul>
- *   <li>{@link BizException} → business error code + message (HTTP 200)</li>
- *   <li>Validation errors → 400 with aggregated field messages</li>
- *   <li>Everything else → 500, message hidden from client, full stack in log</li>
+ *   <li>{@link BizException} → 业务错误码 + 消息 (HTTP 200)</li>
+ *   <li>参数校验错误 (Validation errors) → 返回 400，并聚合字段错误消息</li>
+ *   <li>其他错误 (Everything else) → 返回 500，对客户端隐藏具体信息，在日志中记录完整堆栈</li>
  * </ul>
  */
 @RestControllerAdvice
@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     private static final Logger log = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
-     * Business / domain exceptions – controlled failures, no stack trace needed.
+     * 业务 / 领域异常 – 受控失败，不需要记录堆栈跟踪。
      */
     @ExceptionHandler(BizException.class)
     public Result<Void> handleBizException(BizException e) {
@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @Valid / @Validated on @RequestBody.
+     * 处理 @RequestBody 上的 @Valid / @Validated 异常。
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -50,7 +50,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * @Valid on @ModelAttribute / form binding.
+     * 处理 @ModelAttribute / 表单绑定 上的 @Valid 异常。
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -63,7 +63,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * Catch-all – hide internal details from client, log full trace.
+     * 这个方法捕获所有未处理的异常 – 对客户端隐藏内部细节，记录完整的堆栈跟踪。
      */
     @ExceptionHandler(Throwable.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)

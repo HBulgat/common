@@ -3,9 +3,9 @@ package top.bulgat.common.exception;
 import lombok.Getter;
 
 /**
- * Business exception.
+ * 业务异常。
  * <p>
- * Thrown when business logic validation fails, e.g. invalid parameters, resource not found, etc.
+ * 当业务逻辑验证失败时抛出该异常，例如参数无效，资源未找到等。
  */
 @Getter
 public class BizException extends RuntimeException {

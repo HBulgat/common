@@ -2,7 +2,7 @@
 <configuration>
 
     <!-- ================================================================
-         Properties from Spring Boot application config
+         来自 Spring Boot 应用程序配置的属性
          ================================================================ -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
 
@@ -12,8 +12,8 @@
     <springProperty scope="context" name="LOG_LEVEL"   source="logging.level.root"      defaultValue="INFO"/>
 
     <!-- ================================================================
-         Console appender – coloured text, for local/dev
-         Fields visible: timestamp, level, PID, thread, logger, traceId, message
+         控制台输出端 – 彩色文本，用于本地/开发环境
+         可见字段：时间戳, 级别, PID, 线程, 记录器, traceId, 消息
          ================================================================ -->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -23,23 +23,23 @@
     </appender>
 
     <!-- ================================================================
-         Rolling JSON file – structured output for ELK / Filebeat
-         Filebeat ships *.json.log to Logstash/Elasticsearch.
-         Every field is a first-class Elasticsearch field.
+         按大小和时间滚动的 JSON 日志文件 – 结构化输出供 ELK / Filebeat 使用
+         Filebeat 会将 *.json.log 发送到 Logstash/Elasticsearch。
+         每个字段都是 Elasticsearch 的一级字段。
 
-         Fields emitted:
-           @timestamp      ISO-8601 UTC
-           level           INFO / WARN / ERROR …
-           logger_name     fully-qualified class name
-           thread_name     thread name
-           message         log message body
-           stack_trace     exception + root cause (if any, max 4 KB)
-           traceId         MDC – set by LogIdFilter (distributed trace)
-           app             spring.application.name
-           version         spring.application.version
-           host            hostname of the JVM
-           pid             OS process ID
-           env             spring.profiles.active (set via MDC in LogIdFilter)
+         输出的字段：
+           @timestamp      ISO-8601 UTC 格式时间
+           level           INFO / WARN / ERROR … 级别
+           logger_name     完整的类名
+           thread_name     线程名
+           message         日志消息正文
+           stack_trace     异常 + 根本原因 (如果有，最大 4 KB)
+           traceId         MDC – 由 TraceIdFilter 设置 (用于分布式追踪)
+           app             spring.application.name (应用名)
+           version         spring.application.version (应用版本)
+           host            JVM 所在的主机名
+           pid             操作系统进程 ID
+           env             spring.profiles.active (通过 TraceIdFilter 在 MDC 中设置)
          ================================================================ -->
     <appender name="FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_PATH}/${APP_NAME}.json.log</file>
@@ -51,25 +51,25 @@
         </rollingPolicy>
         <encoder class="net.logstash.logback.encoder.LogstashEncoder">
 
-            <!-- ==== Rename built-in fields to match ELK/OTel convention ==== -->
+            <!-- ==== 重命名内置字段以匹配 ELK/OTel 约定 ==== -->
             <fieldNames>
                 <timestamp>@timestamp</timestamp>
                 <version>[ignore]</version>
                 <levelValue>[ignore]</levelValue>
             </fieldNames>
 
-            <!-- ==== MDC: promote traceId to top-level field ==== -->
+            <!-- ==== MDC: 提升 traceId 为顶层字段 ==== -->
             <includeMdcKeyName>traceId</includeMdcKeyName>
             <includeMdcKeyName>userId</includeMdcKeyName>
             <includeMdcKeyName>requestUri</includeMdcKeyName>
 
-            <!-- ==== Static metadata fields ==== -->
+            <!-- ==== 静态元数据字段 ==== -->
             <customFields>{"app":"${APP_NAME}","version":"${APP_VERSION}"}</customFields>
 
-            <!-- ==== Runtime host / pid via providers ==== -->
-            <!-- Configured implicitly or removed as LogstashEncoder does not support ad-hoc provider tags -->
+            <!-- ==== 运行时主机 / pid (通过 providers 获取) ==== -->
+            <!-- 以隐式配置或已移除，因为 LogstashEncoder 不支持即席提供者标签 -->
 
-            <!-- ==== Exception: root-cause first, max depth 30, max 4KB ==== -->
+            <!-- ==== 异常: 优先打印根本原因，最大深度 30，最大长度 4KB ==== -->
             <throwableConverter class="net.logstash.logback.stacktrace.ShortenedThrowableConverter">
                 <maxDepthPerThrowable>30</maxDepthPerThrowable>
                 <maxLength>4096</maxLength>
@@ -82,7 +82,7 @@
     </appender>
 
     <!-- ================================================================
-         Async wrappers
+         异步包装器
          ================================================================ -->
     <appender name="ASYNC_CONSOLE" class="ch.qos.logback.classic.AsyncAppender">
         <appender-ref ref="CONSOLE"/>
@@ -97,7 +97,7 @@
     </appender>
 
     <!-- ================================================================
-         Suppress noisy framework loggers
+         抑制嘈杂的框架日志记录器
          ================================================================ -->
     <logger name="org.springframework"          level="WARN"/>
     <logger name="org.hibernate"                level="WARN"/>
@@ -105,11 +105,11 @@
     <logger name="org.apache.http"              level="WARN"/>
 
     <!-- ================================================================
-         Profile-based root configuration
+         基于 Profile 的根级配置
 
-         local / dev  →  coloured console only (fast feedback)
-         prod         →  JSON file only (Filebeat → ELK)
-         default      →  console + JSON file
+         local / dev  →  仅有彩色的控制台输出 (快速反馈)
+         prod         →  仅输出到 JSON 文件 (通过 Filebeat 发送至 ELK)
+         default      →  控制台 + JSON 文件
          ================================================================ -->
     <springProfile name="local,dev">
         <root level="${LOG_LEVEL}">

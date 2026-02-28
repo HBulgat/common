@@ -14,37 +14,37 @@
     <packaging>jar</packaging>
 
     <name>common-springboot-middleware</name>
-    <description>Spring Boot auto-configuration middleware: Jackson, LogId, GlobalException, Snowflake ID, etc.</description>
+    <description>Spring Boot 自动配置增强中间件: 提供 Jackson 配置, LogId/TraceId 链路追踪, 全局异常处理, Snowflake ID生成等</description>
 
     <dependencies>
-        <!-- common-base: Result, BizException, IdGenerator, ThreadContext -->
+        <!-- common-base: Result, BizException, IdGenerator, ThreadContext 等 -->
         <dependency>
             <groupId>top.bulgat</groupId>
             <artifactId>common-base</artifactId>
         </dependency>
 
-        <!-- Spring Boot Web (provided: host project supplies it) -->
+        <!-- Spring Boot Web (provided: 由宿主项目提供) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Spring Boot AOP for LogId aspect -->
+        <!-- Spring Boot AOP 用于支持切面 (如需) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Autoconfigure support -->
+        <!-- 自动配置支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-autoconfigure</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Configuration processor for @ConfigurationProperties IDE support -->
+        <!-- 配置处理器，用于提供 @ConfigurationProperties 的 IDE 提示支持 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -52,14 +52,14 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Jackson Java 8 time support -->
+        <!-- Jackson Java 8 Time 时间解析支持 -->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>
             <scope>provided</scope>
         </dependency>
 
-        <!-- Logstash encoder - structured JSON logs for ELK -->
+        <!-- Logstash encoder - 生成供 ELK 收集的结构化 JSON 日志 -->
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>

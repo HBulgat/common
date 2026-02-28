@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * JSON utility based on Jackson.
+ * 基于 Jackson 的 JSON 工具类。
  */
 public final class JsonUtils {
 

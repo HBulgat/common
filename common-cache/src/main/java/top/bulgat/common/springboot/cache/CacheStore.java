@@ -7,24 +7,22 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Abstraction over the cache storage backend.
+ * 缓存存储后端的抽象层。
  * <p>
- * Implementations:
+ * 实现类:
  * <ul>
- *   <li>{@code RedisCacheStore} — backed by {@code StringRedisTemplate}</li>
- *   <li>{@code LocalCacheStore}  — backed by Caffeine + Java collections</li>
+ *   <li>{@code RedisCacheStore} — 基于 {@code StringRedisTemplate}</li>
+ *   <li>{@code LocalCacheStore} — 基于 Caffeine + Java 集合</li>
  * </ul>
  *
- * <p><b>String operations</b> are used by {@link CacheTemplate} internally for
- * object/JSON caching. <b>Hash, List, Set, ZSet operations</b> are exposed as
- * raw primitives for direct use when Redis-native semantics are required
- * (e.g. atomic counters, ranked sets, queues). They are NOT used by
- * {@code CacheTemplate}'s strategy methods.
+ * <p><b>String 操作</b> 主要被 {@link CacheTemplate} 内部用于对象/JSON 缓存。
+ * <b>Hash, List, Set, ZSet 操作</b> 作为原生原语暴露，在需要 Redis 原生语义时直接使用
+ * （例如原子计数器、排名集、队列）。它们<b>不被</b> {@code CacheTemplate} 的策略方法所使用。
  */
 public interface CacheStore {
 
     // ====================================================================
-    // String — used by CacheTemplate strategy methods
+    // String (字符串)操作 — 被 CacheTemplate 策略方法内部使用
     // ====================================================================
 
     void set(String key, String value, long ttl, TimeUnit unit);
@@ -38,19 +36,19 @@ public interface CacheStore {
     boolean hasKey(String key);
 
     /**
-     * Update TTL for an existing key. Returns remaining TTL in seconds,
-     * or -1 if key does not exist.
+     * 更新现有键的 TTL（有效时间）。返回剩余的 TTL 秒数，
+     * 如果键不存在则返回 -1。
      */
     long expire(String key, long ttl, TimeUnit unit);
 
     /**
-     * Batch get (MGET). Returns a map of key → value for all found keys.
-     * Missing keys are absent from the result map.
+     * 批量获取 (MGET)。返回所有找到的键的值的字典（key → value）。
+     * 结果字典中不包含未命中的键。
      */
     Map<String, Optional<String>> multiGet(List<String> keys);
 
     // ====================================================================
-    // Hash — direct use only (not used by CacheTemplate)
+    // Hash (哈希)操作 — 仅供直接使用 (不被 CacheTemplate 使用)
     // ====================================================================
 
     void hSet(String key, String field, String value);
@@ -66,7 +64,7 @@ public interface CacheStore {
     Long hIncrBy(String key, String field, long delta);
 
     // ====================================================================
-    // List — direct use only
+    // List (列表)操作 — 仅供直接使用
     // ====================================================================
 
     Long lPush(String key, String... values);
@@ -82,7 +80,7 @@ public interface CacheStore {
     Long lLen(String key);
 
     // ====================================================================
-    // Set — direct use only
+    // Set (集合)操作 — 仅供直接使用
     // ====================================================================
 
     Long sAdd(String key, String... values);
@@ -94,7 +92,7 @@ public interface CacheStore {
     Long sRem(String key, String... values);
 
     // ====================================================================
-    // ZSet (Sorted Set) — direct use only
+    // ZSet (有序集合)操作 — 仅供直接使用
     // ====================================================================
 
     Boolean zAdd(String key, String value, double score);

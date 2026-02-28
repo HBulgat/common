@@ -7,10 +7,10 @@ import lombok.AccessLevel;
 import java.io.Serializable;
 
 /**
- * Rich text element for Feishu post messages.
+ * 飞书富文本(post)消息的元素。
  * <p>
- * This class serves as both the base class for different element types and a factory for creating them.
- * Constructors are private to enforce usage of static factory methods.
+ * 此类既作为不同元素类型的基类，也作为创建它们的工厂类。
+ * 构造函数是私有的，以强制使用静态工厂方法。
  */
 @Data
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -18,7 +18,7 @@ import java.io.Serializable;
 public class RichTextElement implements Serializable {
     protected String tag;
 
-    // --- Factory Methods ---
+    // --- 工厂方法 ---
 
     public static TextElement text(String text) {
         return new TextElement(text);
@@ -40,7 +40,7 @@ public class RichTextElement implements Serializable {
         return new ImageElement(imageKey);
     }
 
-    // --- Inner Classes ---
+    // --- 内部类 ---
 
     @EqualsAndHashCode(callSuper = true)
     @Data

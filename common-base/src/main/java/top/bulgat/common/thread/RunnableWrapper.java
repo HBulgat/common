@@ -1,10 +1,10 @@
 package top.bulgat.common.thread;
 
 /**
- * Runnable wrapper that propagates traceId across thread boundaries.
+ * 在线程边界间传播 traceId 的 Runnable 包装器。
  * <p>
- * Captures the traceId from the submitting thread via {@link ThreadContext}
- * and restores it in the executing thread.
+ * 从提交线程的 {@link ThreadContext} 中捕获 traceId，
+ * 并在执行线程中恢复它。
  *
  * <pre>
  * ThreadContext.setTraceId(traceId);

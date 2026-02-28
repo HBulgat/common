@@ -1,7 +1,7 @@
 package top.bulgat.common.util;
 
 /**
- * String utility.
+ * 字符串工具类。
  */
 public final class StringUtils {
 
@@ -33,7 +33,7 @@ public final class StringUtils {
     }
 
     /**
-     * camelCase to snake_case. e.g. userName -> user_name
+     * 驼峰命名转下划线命名。例如 userName -> user_name
      */
     public static String camelToUnderscore(String str) {
         if (isBlank(str)) {
@@ -55,7 +55,7 @@ public final class StringUtils {
     }
 
     /**
-     * snake_case to camelCase. e.g. user_name -> userName
+     * 下划线命名转驼峰命名。例如 user_name -> userName
      */
     public static String underscoreToCamel(String str) {
         if (isBlank(str)) {

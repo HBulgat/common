@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 /**
- * Base notice message.
+ * 基础通知消息。
  * <p>
- * Subclasses define channel-specific fields.
+ * 子类定义特定渠道的字段。
  *
  * @see top.bulgat.common.notice.feishu.FeishuTextMessage
  * @see top.bulgat.common.notice.feishu.FeishuPostMessage
@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
 public abstract class NoticeMessage {
 
     /**
-     * Target channel.
+     * 目标渠道。
      */
     private NoticeChannel channel;
 }

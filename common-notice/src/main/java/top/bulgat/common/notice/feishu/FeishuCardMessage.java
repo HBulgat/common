@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 /**
- * Feishu custom card message (raw card JSON).
+ * 飞书自定义卡片消息（原始卡片 JSON）。
  */
 @Data
 @SuperBuilder
@@ -19,7 +19,7 @@ import java.util.Map;
 public class FeishuCardMessage extends FeishuMessage {
 
     /**
-     * Full card JSON structure (header + elements).
+     * 完整的卡片 JSON 结构（header + elements）。
      */
     private Map<String, Object> card;
 

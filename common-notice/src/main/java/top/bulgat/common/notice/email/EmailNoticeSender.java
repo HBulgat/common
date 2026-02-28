@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 /**
- * Email notice sender via SMTP (JavaMail).
+ * 通过 SMTP (JavaMail) 发送电子邮件通知的发送器。
  */
 public class EmailNoticeSender implements NoticeSender {
 

@@ -9,9 +9,9 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * Unified API response wrapper.
+ * 统一 API 响应包装类。
  *
- * @param <T> data type
+ * @param <T> 数据类型
  */
 @Data
 @NoArgsConstructor
@@ -27,7 +27,7 @@ public class Result<T> implements Serializable {
 
     private T data;
 
-    // ==================== Factory Methods ====================
+    // ==================== 工厂方法 ====================
 
     public static <T> Result<T> success() {
         return new Result<>(ErrorCode.SUCCESS.getCode(), ErrorCode.SUCCESS.getMessage(), null);

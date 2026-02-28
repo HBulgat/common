@@ -8,14 +8,14 @@ import top.bulgat.common.id.IdGenerator;
 import top.bulgat.common.id.impl.SnowflakeIdGenerator;
 
 /**
- * Auto-configures a {@link IdGenerator} Bean backed by Snowflake algorithm.
+ * 自动配置基于 Snowflake 算法的 {@link IdGenerator} Bean。
  * <p>
- * Configurable via {@code application.yml}:
+ * 可通过 {@code application.yml} 进行配置：
  * <pre>
  * common:
  *   snowflake:
- *     worker-id: 1      # 0-31
- *     datacenter-id: 1  # 0-31
+ *     worker-id: 1      # 0-31 工作节点 ID
+ *     datacenter-id: 1  # 0-31 数据中心 ID
  * </pre>
  */
 @Configuration

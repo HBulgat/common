@@ -10,7 +10,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Feishu card template message.
+ * 飞书搭建工具生成的卡片模板消息。
  */
 @Data
 @SuperBuilder
@@ -20,17 +20,17 @@ import java.util.Map;
 public class FeishuTemplateCardMessage extends FeishuMessage {
 
     /**
-     * Card template ID from Feishu Card Builder.
+     * 飞书卡片搭建工具中的模板 ID。
      */
     private String templateId;
 
     /**
-     * Template version name (optional).
+     * 模板版本名（可选）。
      */
     private String templateVersionName;
 
     /**
-     * Template variables to fill.
+     * 需要填充的模板变量。
      */
     private Map<String, Object> templateVariable;
 

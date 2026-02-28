@@ -5,14 +5,14 @@ import top.bulgat.common.id.IdGenerator;
 import top.bulgat.common.time.SystemClock;
 
 /**
- * Snowflake algorithm ID generator.
+ * 雪花算法 ID 生成器。
  * <p>
- * Generates 64-bit globally unique, time-ordered long IDs.
+ * 生成 64 位全局唯一且按时间递增的 long 类型 ID。
  * <pre>
- * Structure (64 bit):
- * 0 - 41 bit timestamp - 5 bit datacenter - 5 bit worker - 12 bit sequence
+ * 结构 (64 位):
+ * 0 - 41 位时间戳 - 5 位数据中心 - 5 位工作机器 - 12 位序列号
  * </pre>
- * Thread-safe.
+ * 线程安全。
  */
 public class SnowflakeIdGenerator implements IdGenerator {
 
@@ -28,7 +28,7 @@ public class SnowflakeIdGenerator implements IdGenerator {
     private static final long DATACENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
     private static final long TIMESTAMP_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATACENTER_ID_BITS;
 
-    /** Epoch: 2024-01-01 00:00:00 UTC */
+    /** 起始时间戳：2024-01-01 00:00:00 UTC */
     private static final long EPOCH = 1704067200000L;
 
     @Getter

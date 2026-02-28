@@ -1,11 +1,11 @@
 package top.bulgat.common.constant;
 
 /**
- * Common constants.
+ * 公共常量类。
  */
 public interface CommonConstants {
 
-    // ==================== Pagination ====================
+    // ==================== 分页参数 ====================
 
     int DEFAULT_PAGE_NUM = 1;
 
@@ -13,7 +13,7 @@ public interface CommonConstants {
 
     int MAX_PAGE_SIZE = 500;
 
-    // ==================== Separators ====================
+    // ==================== 分隔符 ====================
 
     String EMPTY = "";
 
@@ -25,13 +25,13 @@ public interface CommonConstants {
 
     String SLASH = "/";
 
-    // ==================== Boolean flags ====================
+    // ==================== 布尔标识 ====================
 
     int YES = 1;
 
     int NO = 0;
 
-    // ==================== Date formats ====================
+    // ==================== 日期格式 ====================
 
     String DATE_FORMAT = "yyyy-MM-dd";
 

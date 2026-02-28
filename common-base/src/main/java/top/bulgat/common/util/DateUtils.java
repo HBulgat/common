@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
- * Date/time utility based on {@code java.time} API.
+ * 基于 {@code java.time} API 的日期时间工具类。
  */
 public final class DateUtils {
 

@@ -4,34 +4,34 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Extension point for Plan B: allows CacheLoader to declare how its value
- * should be stored and retrieved from the CacheStore.
+ * 方案 B 的扩展点：允许 CacheLoader 声明它的值应该如何
+ * 在 CacheStore 中存储和检索。
  * <p>
- * Plan A only ships {@link StringCacheStoreOps}. Future implementations can
- * add HashCacheStoreOps, ZSetCacheStoreOps, etc.
+ * 方案 A 仅提供 {@link StringCacheStoreOps}。未来的实现可以
+ * 添加 HashCacheStoreOps、ZSetCacheStoreOps 等。
  *
- * @param <V> the Java value type
+ * @param <V> Java 值的类型
  */
 public interface CacheStoreOps<V> {
 
     /**
-     * Reads the typed value from the cache store.
-     * @return CacheHit containing the value (can be null), or CacheHit.miss() if not found.
+     * 从缓存存储中读取类型化的值。
+     * @return 包含该值的 CacheHit（可能为 null），如果未找到则返回 CacheHit.miss()。
      */
     CacheHit<V> read(CacheStore store, String key, Class<V> type);
 
     /**
-     * Write a non-null value to the store with TTL.
+     * 将包含 TTL 的非空值写入存储。
      */
     void write(CacheStore store, String key, V value, long ttl, TimeUnit unit);
 
     /**
-     * Write a null-marker (防穿透) with a short TTL.
+     * 写入一个带有较短 TTL 的防穿透空标记 (null-marker)。
      */
     void writeNull(CacheStore store, String key, long nullTtl, TimeUnit unit);
 
     /**
-     * Whether the raw stored representation indicates a cached null.
+     * 判断原始的存储表达是否表示一个缓存的 null。
      */
     boolean isNullMarker(String raw);
 }

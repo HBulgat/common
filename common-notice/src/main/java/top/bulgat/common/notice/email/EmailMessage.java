@@ -11,7 +11,7 @@ import top.bulgat.common.notice.NoticeMessage;
 import java.util.List;
 
 /**
- * Email notice message.
+ * 电子邮件通知消息。
  *
  * <pre>
  * EmailMessage.builder()
@@ -33,7 +33,7 @@ public class EmailMessage extends NoticeMessage {
     private String body;
 
     /**
-     * Recipient email addresses.
+     * 收件人电子邮件地址。
      */
     private List<String> to;
 

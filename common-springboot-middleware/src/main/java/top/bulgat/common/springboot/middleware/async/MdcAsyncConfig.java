@@ -11,10 +11,10 @@ import java.util.Map;
 import java.util.concurrent.Executor;
 
 /**
- * Configures a task executor that propagates the MDC context (traceId, etc.)
- * from the parent thread into {@code @Async} worker threads.
+ * 配置一个任务执行器，将 MDC 上下文（如 traceId 等）
+ * 从父线程传递到 {@code @Async} 工作线程。
  * <p>
- * Without this, async calls lose the {@code traceId} because MDC is thread-local.
+ * 如果没有这个配置，异步调用会丢失 {@code traceId}，因为 MDC 是线程局部的。
  */
 @EnableAsync
 @Configuration
@@ -34,7 +34,7 @@ public class MdcAsyncConfig {
 
     private TaskDecorator mdcTaskDecorator() {
         return task -> {
-            // Capture parent thread's MDC before handing off
+            // 移交前捕获父线程的 MDC
             Map<String, String> contextMap = MDC.getCopyOfContextMap();
             return () -> {
                 try {

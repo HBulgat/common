@@ -1,22 +1,22 @@
 package top.bulgat.common.notice;
 
 /**
- * Notice sender interface.
+ * 通知发送器接口。
  * <p>
- * Each implementation handles a specific {@link NoticeChannel}.
+ * 每个实现处理一个特定的 {@link NoticeChannel}。
  */
 public interface NoticeSender {
 
     /**
-     * The channel this sender handles.
+     * 该发送器处理的渠道。
      */
     NoticeChannel channel();
 
     /**
-     * Send the message.
+     * 发送消息。
      *
-     * @param message notice message
-     * @return true if sent successfully
+     * @param message 通知消息
+     * @return 如果发送成功则返回 true
      */
     boolean send(NoticeMessage message);
 }

@@ -9,7 +9,7 @@ import lombok.experimental.SuperBuilder;
 import java.util.Map;
 
 /**
- * Feishu text message with @mention helpers.
+ * 带有 @ 提醒辅助功能的飞书纯文本消息。
  */
 @Data
 @SuperBuilder
@@ -31,18 +31,18 @@ public class FeishuTextMessage extends FeishuMessage {
     }
 
     /**
-     * Generate @mention tag for a specific user.
+     * 为特定用户生成 @ 提醒标签。
      *
-     * @param userId Feishu user_id (e.g. "ou_xxx")
-     * @param name   display name
-     * @return at tag string
+     * @param userId 飞书 user_id（例如 "ou_xxx"）
+     * @param name   显示名称
+     * @return at 标签字符串
      */
     public static String atUser(String userId, String name) {
         return "<at user_id=\"" + userId + "\">" + name + "</at>";
     }
 
     /**
-     * Generate @all tag to mention everyone in the group.
+     * 生成 @all 标签以提醒群组中的所有人。
      */
     public static String atAll() {
         return "<at user_id=\"all\">所有人</at>";
