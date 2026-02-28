@@ -7,10 +7,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.MDC;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.OncePerRequestFilter;
+import top.bulgat.common.base.id.IdGenerator;
 import top.bulgat.common.base.thread.ThreadContext;
 
 import java.io.IOException;
-import java.util.UUID;
 
 /**
  * 为每个 HTTP 请求分配唯一的 {@code traceId} 的 Servlet 过滤器。
@@ -27,6 +27,12 @@ public class TraceIdFilter extends OncePerRequestFilter {
     public static final String TRACE_ID_HEADER = "X-Trace-Id";
     public static final String MDC_TRACE_KEY = "traceId";
 
+    private final IdGenerator idGenerator;
+
+    public TraceIdFilter(IdGenerator idGenerator) {
+        this.idGenerator = idGenerator;
+    }
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -34,7 +40,7 @@ public class TraceIdFilter extends OncePerRequestFilter {
         // 如果存在，优先使用上游（例如网关）传入的 traceId
         String traceId = request.getHeader(TRACE_ID_HEADER);
         if (traceId == null || traceId.isBlank()) {
-            traceId = UUID.randomUUID().toString().replace("-", "");
+            traceId = String.valueOf(idGenerator.nextId());
         }
         MDC.put(MDC_TRACE_KEY, traceId);
         ThreadContext.setTraceId(traceId);

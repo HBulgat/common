@@ -1,0 +1,2 @@
+org.springframework.boot.SpringApplicationRunListener=\
+top.bulgat.common.springboot.middleware.listener.TraceIdApplicationRunListener

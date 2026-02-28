@@ -35,7 +35,7 @@
 - **`GlobalExceptionHandler`**：全局拦截 Spring Web 请求抛出的任何异常。将其转化为标准的 `Result` JSON 并严防堆栈侧漏（未知致命异常伪装为 500）。
 - **零配置分布式 TraceId 链路追踪体系**：通过高优先级过滤器 `TraceIdFilter` 派发/继承 `traceId` 并塞入 `MDC` 给 Logback。配备 `MdcAsyncConfig` 保障该 ID 能穿透 `@Async("mdcTaskExecutor")` 异步线程不出错。
 - **`RequestLoggingFilter`**：全天候可观测的 Web 流量黑匣子，基于 AOP 精准记录出入参快照与毫秒耗时。
-- **`logback-spring.xml`**：内建日志分级切割体系。开发时终端彩色高亮；生产时异步写 JSON (`net.logstash.logback`) 供 ELK 直连抓取。
+- **`logback-spring.xml`**：内建日志分级切割体系。本地调试时终端彩色高亮输出；`dev`/`prod` 环境下纯异步分别落盘到 `/logs/dev/` 和 `/logs/` 下的 JSON 文件供 ELK 直接抓取。
 - **`JsonConfig`**：解决双端交互通病，例如强制 ISO-8601 日期格式，将 `Long` 自动转成 `String` 防止前端 JS 精度丢失。
 
 � [查看 common-springboot-middleware 详细文档](./common-springboot-middleware/README.md)

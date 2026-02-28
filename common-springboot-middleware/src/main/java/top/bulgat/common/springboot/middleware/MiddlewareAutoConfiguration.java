@@ -12,6 +12,7 @@ import top.bulgat.common.springboot.middleware.config.SnowflakeIdConfig;
 import top.bulgat.common.springboot.middleware.exception.GlobalExceptionHandler;
 import top.bulgat.common.springboot.middleware.filter.TraceIdFilter;
 import top.bulgat.common.springboot.middleware.filter.RequestLoggingFilter;
+import top.bulgat.common.base.id.IdGenerator;
 
 /**
  * Spring Boot 3.x 自动配置入口点。
@@ -32,8 +33,8 @@ public class MiddlewareAutoConfiguration {
     // ---- LogId 过滤器 (始终激活，最高优先级) ----
 
     @Bean
-    public FilterRegistrationBean<TraceIdFilter> logIdFilter() {
-        FilterRegistrationBean<TraceIdFilter> reg = new FilterRegistrationBean<>(new TraceIdFilter());
+    public FilterRegistrationBean<TraceIdFilter> logIdFilter(IdGenerator idGenerator) {
+        FilterRegistrationBean<TraceIdFilter> reg = new FilterRegistrationBean<>(new TraceIdFilter(idGenerator));
         reg.addUrlPatterns("/*");
         reg.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return reg;

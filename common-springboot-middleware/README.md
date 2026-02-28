@@ -51,6 +51,7 @@ common:
 本模块内建了标准化的 Logback 日志配置（位于 `src/main/resources/logback-spring.xml`），引入该模块的 Spring Boot 项目将直接继承这一套配置。
 
 在不同的 `spring.profiles.active` 环境下提供了不同策略：
-- **`dev` 或 `local`（本地/开发环境）**：启用 `CONSOLE` 终端输出，并且高亮打印，便于开发者观察线程堆栈和 `traceId`。
+- **`local`（本地调试环境）**：仅启用 `CONSOLE` 终端输出，并且高亮打印，便于开发者观察线程堆栈和 `traceId`。
+- **`dev`（开发联调环境）**：屏蔽本地终端输出，纯异步通过 `ASYNC_FILE_JSON` 将日志写入 `/logs/dev/{应用名}.json.log` 文件。
 - **`prod`（生产环境）**：屏蔽本地终端输出，纯异步通过 `ASYNC_FILE_JSON` 将日志写入 `/logs/{应用名}.json.log` 文件。
-- 该文件每一行是一个纯 JSON 对象，里面已自带了格式化好的 `@timestamp`, `traceId`, `logger_name`, `stack_trace`。非常适合无缝采集并且丢进 Filebeat → Logstash → Elasticsearch 体系，不再需要复杂的正则匹配。
+- 生成的 `.json.log` 文件每一行是一个纯 JSON 对象，里面已自带了格式化好的 `@timestamp`, `traceId`, `logger_name`, `stack_trace`。非常适合无缝采集并且丢进 Filebeat → Logstash → Elasticsearch 体系，不再需要复杂的正则匹配。
