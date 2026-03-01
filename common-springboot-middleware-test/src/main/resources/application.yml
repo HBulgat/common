@@ -1,7 +1,0 @@
-spring:
-  application:
-    name: common.springboot_middleware.test
-
-  profiles:
-    active: local
-
