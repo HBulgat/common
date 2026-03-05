@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: common.springboot.example
+server:
+  servlet:
+    context-path: /api
+common:
+  middleware:
+    snowflake:
+      worker-id: 1
+      datacenter-id: 1
+    request-log:
+      enabled: true

@@ -30,11 +30,10 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Spring Boot AOP 用于支持切面 (如需) -->
+        <!-- Spring Boot AOP 用于支持切面 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
-            <scope>provided</scope>
         </dependency>
 
         <!-- 自动配置支持 -->

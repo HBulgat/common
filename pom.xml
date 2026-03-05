@@ -17,6 +17,7 @@
         <module>common-notice</module>
         <module>common-springboot-middleware</module>
         <module>common-cache</module>
+        <module>common-springboot-example</module>
     </modules>
 
     <properties>
@@ -42,6 +43,21 @@
             <dependency>
                 <groupId>top.bulgat</groupId>
                 <artifactId>common-base</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.bulgat</groupId>
+                <artifactId>common-cache</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.bulgat</groupId>
+                <artifactId>common-springboot-middleware</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>top.bulgat</groupId>
+                <artifactId>common-notice</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

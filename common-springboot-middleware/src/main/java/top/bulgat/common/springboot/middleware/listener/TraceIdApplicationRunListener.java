@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.SpringApplicationRunListener;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.ConfigurableEnvironment;
-import top.bulgat.common.springboot.middleware.filter.TraceIdFilter;
+import top.bulgat.common.springboot.middleware.component.TraceIdFilter;
 
 import java.time.Duration;
 import java.util.UUID;

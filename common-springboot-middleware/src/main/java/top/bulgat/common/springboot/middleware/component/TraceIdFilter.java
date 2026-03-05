@@ -1,4 +1,4 @@
-package top.bulgat.common.springboot.middleware.filter;
+package top.bulgat.common.springboot.middleware.component;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

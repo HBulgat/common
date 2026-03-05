@@ -15,16 +15,17 @@ import top.bulgat.common.base.id.impl.SnowflakeIdGenerator;
  * 可通过 {@code application.yml} 进行配置：
  * <pre>
  * common:
- *   snowflake:
- *     worker-id: 1      # 0-31 工作节点 ID
- *     datacenter-id: 1  # 0-31 数据中心 ID
+ *   middleware:
+ *      snowflake:
+ *          worker-id: 1      # 0-31 工作节点 ID
+ *          datacenter-id: 1  # 0-31 数据中心 ID
  * </pre>
  */
 @Configuration
 public class SnowflakeIdConfig {
 
     @Bean
-    @ConfigurationProperties(prefix = "common.snowflake")
+    @ConfigurationProperties(prefix = "common.middleware.snowflake")
     public SnowflakeProperties snowflakeProperties() {
         return new SnowflakeProperties();
     }

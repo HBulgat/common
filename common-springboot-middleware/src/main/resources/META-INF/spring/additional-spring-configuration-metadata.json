@@ -1,0 +1,10 @@
+{
+  "properties": [
+    {
+      "name": "common.middleware.request-log.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启请求、响应日志过滤器.",
+      "defaultValue": false
+    }
+  ]
+}
