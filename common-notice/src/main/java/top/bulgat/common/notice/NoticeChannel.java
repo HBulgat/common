@@ -10,8 +10,11 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum NoticeChannel {
 
-    FEISHU("feishu"),
-    EMAIL("email");
+    FEISHU,
+    EMAIL;
 
-    private final String value;
+
+    public static NoticeChannel fromValue(String value){
+        return valueOf(value.toUpperCase());
+    }
 }
