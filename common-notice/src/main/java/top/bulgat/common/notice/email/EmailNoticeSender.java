@@ -31,6 +31,16 @@ public class EmailNoticeSender implements NoticeSender {
         });
     }
 
+    public EmailNoticeSender(EmailSenderMeta meta, String username, String password) {
+        this.from = username;
+        this.session = Session.getInstance(EmailSenderMeta.toProperties(meta), new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username, password);
+            }
+        });
+    }
+
     @Override
     public NoticeChannel channel() {
         return NoticeChannel.EMAIL;
