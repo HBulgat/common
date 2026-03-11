@@ -19,6 +19,9 @@ public class EmailSenderMeta {
     private boolean sslEnable;
     private String charset;
 
+    private String username;
+    private String password;
+
     public static Properties toProperties(EmailSenderMeta meta){
         if(meta==null) throw new IllegalArgumentException("meta can't be null");
         Properties properties=new Properties();
@@ -29,4 +32,5 @@ public class EmailSenderMeta {
         properties.put("mail.mime.charset", StringUtils.isBlank(meta.getCharset())?"UTF-8":meta.getCharset());
         return properties;
     }
+
 }

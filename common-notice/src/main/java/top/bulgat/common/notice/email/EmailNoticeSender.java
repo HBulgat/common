@@ -31,12 +31,12 @@ public class EmailNoticeSender implements NoticeSender {
         });
     }
 
-    public EmailNoticeSender(EmailSenderMeta meta, String username, String password) {
-        this.from = username;
+    public EmailNoticeSender(EmailSenderMeta meta) {
+        this.from = meta.getUsername();
         this.session = Session.getInstance(EmailSenderMeta.toProperties(meta), new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
+                return new PasswordAuthentication(meta.getUsername(), meta.getPassword());
             }
         });
     }
