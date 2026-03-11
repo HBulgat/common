@@ -1,5 +1,6 @@
 package top.bulgat.common.notice.email;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import top.bulgat.common.base.util.StringUtils;
@@ -8,6 +9,7 @@ import java.util.Properties;
 
 @Data
 @Builder
+@AllArgsConstructor
 public class EmailSenderMeta {
     private String host;
     private Integer port;
