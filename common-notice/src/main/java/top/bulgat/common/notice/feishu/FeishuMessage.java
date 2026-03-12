@@ -8,12 +8,28 @@ import lombok.experimental.SuperBuilder;
 import top.bulgat.common.notice.NoticeChannel;
 import top.bulgat.common.notice.NoticeMessage;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * 所有飞书 Webhook 消息的基类。
  */
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.EXISTING_PROPERTY,
+        property = "msg_type",
+        visible = true,
+        defaultImpl = FeishuTextMessage.class
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = FeishuTextMessage.class, name = "text"),
+        @JsonSubTypes.Type(value = FeishuCardMessage.class, name = "interactive"),
+        @JsonSubTypes.Type(value = FeishuPostMessage.class, name = "post")
+})
 @Data
 @SuperBuilder
 @NoArgsConstructor
