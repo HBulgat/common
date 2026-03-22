@@ -23,9 +23,8 @@ public class FeishuCardMessage extends FeishuMessage {
      */
     private Map<String, Object> card;
 
-    @Override
-    public String msgType() {
-        return "interactive";
+    {
+        msgType="interactive";
     }
 
     @Override

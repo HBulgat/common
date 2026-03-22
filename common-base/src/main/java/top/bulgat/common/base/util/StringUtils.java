@@ -17,7 +17,7 @@ public final class StringUtils {
     }
 
     public static boolean isBlank(String str) {
-        return str == null || str.isBlank();
+        return str == null || str.trim().isBlank();
     }
 
     public static boolean isNotBlank(String str) {

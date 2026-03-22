@@ -20,9 +20,8 @@ public class FeishuTextMessage extends FeishuMessage {
 
     private String text;
 
-    @Override
-    public String msgType() {
-        return "text";
+    {
+        msgType="text";
     }
 
     @Override

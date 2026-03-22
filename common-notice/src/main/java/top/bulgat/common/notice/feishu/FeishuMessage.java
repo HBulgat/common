@@ -1,5 +1,6 @@
 package top.bulgat.common.notice.feishu;
 
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -8,9 +9,6 @@ import lombok.experimental.SuperBuilder;
 import top.bulgat.common.notice.NoticeChannel;
 import top.bulgat.common.notice.NoticeMessage;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -44,12 +42,15 @@ public abstract class FeishuMessage extends NoticeMessage {
     /**
      * 自定义机器人的 Webhook URL。
      */
+    @JsonIgnore
     private String webhookUrl;
+
 
     /**
      * 飞书的 msg_type 值。
      */
-    public abstract String msgType();
+    @JsonProperty("msg_type")
+    protected String msgType;
 
     /**
      * 构建此消息的完整载荷(Payload) Map。
@@ -58,7 +59,7 @@ public abstract class FeishuMessage extends NoticeMessage {
      */
     public Map<String, Object> toPayload() {
         Map<String, Object> body = new LinkedHashMap<>();
-        body.put(KEY_MSG_TYPE, msgType());
+        body.put(KEY_MSG_TYPE, msgType);
         body.putAll(specificPayload());
         return body;
     }

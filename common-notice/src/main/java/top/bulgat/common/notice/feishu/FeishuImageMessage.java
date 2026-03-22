@@ -23,9 +23,8 @@ public class FeishuImageMessage extends FeishuMessage {
      */
     private String imageKey;
 
-    @Override
-    public String msgType() {
-        return "image";
+    {
+        msgType="image";
     }
 
     @Override

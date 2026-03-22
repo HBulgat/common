@@ -23,9 +23,8 @@ public class FeishuShareChatMessage extends FeishuMessage {
      */
     private String shareChatId;
 
-    @Override
-    public String msgType() {
-        return "share_chat";
+    {
+        msgType="share_chat";
     }
 
     @Override

@@ -34,9 +34,8 @@ public class FeishuTemplateCardMessage extends FeishuMessage {
      */
     private Map<String, Object> templateVariable;
 
-    @Override
-    public String msgType() {
-        return "interactive";
+    {
+        msgType="interactive";
     }
 
     @Override

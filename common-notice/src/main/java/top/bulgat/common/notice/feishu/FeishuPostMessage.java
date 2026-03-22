@@ -23,9 +23,8 @@ public class FeishuPostMessage extends FeishuMessage {
      */
     private RichTextContent content;
 
-    @Override
-    public String msgType() {
-        return "post";
+    {
+        msgType="post";
     }
 
     @Override
